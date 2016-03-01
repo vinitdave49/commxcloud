@@ -1,0 +1,368 @@
+{% extends 'CommcloudVoiceBundle::base.html.twig' %}
+{% block content %}
+    <div class="content-wrapper">
+        
+    </div>
+{% endblock %}
+{% block sidebar %}
+<aside class="main-sidebar">
+
+    <!-- sidebar -->
+    <section class="sidebar">
+        <!-- Sidebar Menu -->
+        
+        <!-- User Sidebar-->
+            <ul class="sidebar-menu">
+                <li class="header">Menu</li>
+                <!-- Optionally, you can add icons to the links -->
+                 <li class="active">
+        		 	<a href="#" id="commcloud">
+        		 		<i class="fa fa-link"></i> 
+        		 		<span >CommCloud</span>
+        		 	</a>
+        		 </li>
+        		{% if is_granted('ROLE_USER') %} 
+        		 <li>
+        			<a href="#">
+        				<i class="fa fa-share"></i> 
+        				<span>Statistics</span>
+        				<i class="fa fa-angle-left pull-right"></i>
+        			</a>
+        			<ul class="treeview-menu menu-open" style="display: none;">
+        				<li>
+        					<a href="/calls/list" id="Call_List" class="load-menu">
+        						<i class="fa fa-link"></i> 
+        						<span>Call List</span>
+        					</a>
+        				</li>
+        				<li>
+        					<a href="/calls/history" id="Call_History" class="load-menu">
+        						<i class="fa fa-link"></i> 
+        						<span>Call History</span>
+        					</a>
+        				</li>
+        				<li>
+        					<a href="/agent/list" id="Agent_List" class="load-menu">
+        						<i class="fa fa-link"></i> 
+        						<span>Agent List</span>
+        					</a>
+        				</li>
+        				{#<li>#}
+        				{#	<a href="/call/recording" id="CallRecording_List" class="load-menu">#}
+        				{#		<i class="fa fa-link"></i> #}
+        				{#		<span>Call Recordings</span>#}
+        				{#	</a>#}
+        				{#</li>#}
+        							
+        			</ul>
+    		    </li>
+    		    {% endif %}  
+    		    
+    		    {% if is_granted('ROLE_SUPERVISOR') %} 
+    		     <li>
+                    <a href="#">
+                        <i class="fa fa-share"></i>
+                        <span>Reports</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu menu-open" style="display: none;">
+                        <li>
+                            <a href="#" id="realtime">
+                                <i class="fa fa-share"></i>
+                                <span>Realtime</span>
+                                <i class="fa fa-angle-left pull-right"></i>                                        
+                            </a>
+                            <ul class="treeview-menu menu-open" style="display: none;">
+                                <li>
+                                    <a href="/load_rt_taskqueue_report_filter" id="rt_taskqueue" class="load-menu">
+                                        <i class="fa fa-link"></i>
+                                        <span>TaskQueue</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/load_rt_workflow_report_filter" id="rt_workflow" class="load-menu">
+                                        <i class="fa fa-link"></i>
+                                        <span>Workflow</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/load_rt_worker_report_filter" id="rt_worker" class="load-menu">
+                                        <i class="fa fa-link"></i>
+                                        <span>Worker</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/calls/list" id="rt_call_list" class="load-menu">
+                                        <i class="fa fa-link"></i>
+                                        <span>Call List</span>
+                                    </a>
+                                </li>                                        
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" id="historical">
+                                <i class="fa fa-share"></i>
+                                <span>Historical</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu menu-open" style="display: none;">
+                                <li>
+                                    <a href="/load_ht_taskqueue_report_filter" id="ht_taskqueue" class="load-menu">
+                                        <i class="fa fa-link"></i>
+                                        <span>TaskQueue</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/load_ht_workflow_report_filter" id="ht_workflow" class="load-menu">
+                                        <i class="fa fa-link"></i>
+                                        <span>Workflow</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" id="ht_worker_parent">
+                                        <i class="fa fa-share"></i>
+                                        <span>Worker</span>
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </a>
+                                    <ul class="treeview-menu menu-open" style="display: none;">
+                                        <li>
+                                            <a href="/load_ht_worker_report_filter" id="ht_worker" class="load-menu">
+                                                <i class="fa fa-link"></i>
+                                                <span>Worker</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/load_ht_workeractivitydurationbytaskqueue_report_filter" id="ht_workeractivitydurationbytaskqueue" class="load-menu">
+                                                <i class="fa fa-link"></i>
+                                                <span style="white-space:pre-wrap;">Workers Activity Duration by TaskQueue</span>
+                                            </a>
+                                        </li>                                                
+                                    </ul>    
+                                </li>
+                                <li>
+                                    <a href="/calls/list" id="ht_call_list">
+                                        <i class="fa fa-link"></i>
+                                        <span>Call List</span>
+                                    </a>
+                                </li>                                        
+                            </ul>                                    
+                        </li>
+                    </ul>
+                 </li>
+                 <li>
+                    <a href"#" id="qm">
+                        <i class="fa fa-share"></i>
+                        <span>Quality Monitoring</span>
+                        <i class="fa fa-angle-left pull-right"></i>                                
+                    </a>
+                    <ul class="treeview-menu menu-open" style="display: none;">
+                        <li>
+                            <a href="#" id="transcripts">
+                                <i class="fa fa-link"></i>
+                                <span>Call Transcripts</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/call/recording" id="CallRecording_List" class="load-menu">
+                                <i class="fa fa-link"></i>
+                                <span>Call Recordings</span>
+                            </a>
+                        </li>
+                    </ul>
+            </li>
+                {% endif %}
+                
+                {% if is_granted('ROLE_ADMIN') %}
+                 <li>
+                    <a href="#">
+                        <i class="fa fa-share"></i>
+                        <span>Create/Edit</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu menu-open" style="display: none;">
+                        <li>
+                            <a href="/createtaskqueue" id="taskqueue" class="load-menu">
+                                <i class="fa fa-link"></i>
+                                <span>TaskQueue</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/createworker" id="worker" class="load-menu">
+                                <i class="fa fa-link"></i>
+                                <span>Worker</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/createworkflow" id="workflow" class="load-menu">
+                                <i class="fa fa-link"></i>
+                                <span>Workflow</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/createactivity" id="activity" class="load-menu">
+                                <i class="fa fa-link"></i>
+                                <span>Activity</span>
+                            </a>
+                        </li>
+                    </ul>
+            </li>
+                {% endif %}
+            </ul>
+        <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+    
+</aside>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script>
+window.onload = function(){
+   
+   var navLinks = document.querySelectorAll('.load-menu');
+	
+	var updateContent = function(data) {
+	  // Check to make sure that this state object is not null.
+	  console.log("data :" + data);
+	     
+	  if (data == null) {
+	    // $('.content-wrapper').textContent = stateObj.content;
+	    // console.log("$('.content-wrapper').textContent" + $('.content-wrapper').textContent);
+	     return;
+	  	  //console.log("state obj:" + stateObj.state);
+	  	
+	  }
+	  else {
+	  	console.log("in else block");
+	  	console.log("data.content " + data.content);
+	   //$('.content-wrapper').innerHTML = data.content;
+	   $('.content-wrapper').empty().append(data.content);
+	   //console.log("$('.content-wrapper').textContent " + $('.content-wrapper').innerHTML);
+	  }
+	};
+	
+	// Attach click listeners for each of the nav links.
+	for (var i = 0; i < navLinks.length; i++) {
+	  navLinks[i].addEventListener('click', function(e) {
+	    e.preventDefault();
+	
+	    // Fetch the page data using the URL in the link.
+	    var pageURL = this.attributes['href'].value;
+	    console.log(pageURL);
+	    var pageTitle = this.attributes['id'].value.replace(/[#_]/g, "").toLowerCase();
+	    $(".content-wrapper").empty();
+		if(document.getElementById('theImg')){ document.getElementById('theImg').remove(); }
+		$(".content-wrapper").append("<div style='margin:auto;left:50%;right:50%;top:50%;bottom:0px;z-index: 1000;opacity: 0.50;position:fixed;'><img id='theImg' src='{{ asset('') }}'/></div>");
+		try{
+			 //$.post("/symfony/web/app_dev.php/app" + pageURL, function(data,err){
+    //       		//alert("Data: " + data + "\nStatus: " + status);
+    //       		if(err){ console.log("error" + err);}
+    //       		console.log("data" + data);
+    //       		$('#theImg').remove();
+    //       		Page[pageTitle].content = data || null;
+    //       		updateContent(Page[pageTitle]);
+    //       		 history.pushState(Page[pageTitle], e.target.textContent, pageURL);
+   	// 	     });
+   	        //used xmlhttprequest to improve performance by ashwin deshpande
+    	     var xmlhttp = new XMLHttpRequest();   
+    	     xmlhttp.onreadystatechange = function() {
+                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    //var data = JSON.parse(xmlhttp.responseText);
+                    var data = xmlhttp.responseText;
+                    console.log("data" + data);
+           		    $('#theImg').remove();
+           	    	Page[pageTitle].content = data || null;
+           	    	updateContent(Page[pageTitle]);
+           	     	history.pushState(Page[pageTitle], e.target.textContent, pageURL);
+                 }
+             };
+             xmlhttp.open("POST", "/web/app_dev.php/app" + pageURL, true);
+             xmlhttp.send();
+    		}
+		catch(e){
+			console.log(e);
+		}
+		
+	 	
+	 	//console.log("outside Page[pageTitle]" + JSON.stringify(Page[pageTitle]));
+	 	 // Create a new history item.
+	   
+	    // Update the title and content.
+	    
+		
+	  });
+	}
+	
+	window.addEventListener('popstate', function(event) {
+    	//	History.replaceState({data:"any kind of data object"}, "State Title", "?urlforthestate=1");
+    	console.log('popstate fired!' + event);
+    	console.log(event.state.content);
+    		//$(".content-wrapper").textContent = event;
+    	  updateContent(event.state)
+    	});
+    	console.log("$('.content-wrapper').html()" + $('.content-wrapper').html());
+    	
+    	history.replaceState({
+          content: $('.content-wrapper').html()
+         // photo: photoEl.src
+        }, document.title, document.location.href);
+		
+}
+	
+
+	var Page = {
+		calllist : {
+			content :""
+		},
+		callhistory : {
+			content :""
+		},
+		agentlist : {
+			content :""
+		},
+		callrecordinglist : {
+			content :""
+		},
+		rtcalllist : {
+			content :""
+		},
+		rttaskqueue : {
+			content :""
+		},
+		rtworkflow : {
+			content :""
+		},
+		rtworker : {
+			content :""
+		},
+		rtcalllist : {
+			content :""
+		},
+		httaskqueue : {
+			content :""
+		},
+		htworkflow : {
+			content :""
+		},
+		htworker : {
+			content :""
+		},
+		htworkeractivitydurationbytaskqueue : {
+			content :""
+		},
+		activity: {
+		    
+		},
+		taskqueue: {
+		    
+		},
+		worker: {
+		    
+		},
+		workflow: {
+		    
+		}
+	}
+	
+</script>
+{% endblock %}

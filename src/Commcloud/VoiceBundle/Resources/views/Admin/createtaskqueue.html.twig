@@ -1,0 +1,73 @@
+<section class="content">
+    <div class="row">
+        <div class="box box-danger">
+            <div class="box-header with-border">
+                <h3 class="box-title">Create TaskQueue</h3>
+            </div>
+            <div class="box-body">
+                <div class="col-md-6">
+                    <div class="form-group">
+                                <label>TaskQueue Name</label>
+                                <input type="text" id="tqName" name="tqName" class="form-control" placeholder="Friendly Task Queue Name">
+                                <label>Reservation Activity</label>
+                                <select id="reservationActivity" name="reservationActivity" class="form-control">
+                                    <option value="WA81cd6c807dc20b2d1e829d226f2ac692">Busy</option>
+                                    <option value="WAb7f02f442ef2784e2644305b36c632e8" selected="selected">Reserved</option>
+                                    <option value="WA7b56deb0d7cd97a69b663e4a62532ac7">Offline</option>
+                                </select>
+                                <label>Assignment Activity</label>
+                                <select id="assignmentActivity" name="assignmentActivity" class="form-control">
+                                    <option value="WA81cd6c807dc20b2d1e829d226f2ac692" selected="selected">Busy</option>
+                                    <option value="WAb7f02f442ef2784e2644305b36c632e8">Reserved</option>
+                                    <option value="WA7b56deb0d7cd97a69b663e4a62532ac7">Offline</option>
+                                </select>
+
+
+                                <label>Max. Reserved Workers</label>
+                                <input type="text" id="maxreservWorkers" name="maxreservWorkers" class="form-control" placeholder="Max. Reserved Workers">
+
+
+                                <label>Target Workers</label>
+                                <input type="text" id="targetWorkers" name="targetWorkers" class="form-control" placeholder="languages HAS 'ru' AND name IN ['Jimmy', 'Bob', 'Alice']">
+
+
+                                <button type="button" id="btnsubmit" name="btnsubmit" id="submit" class="btn btn-block btn-danger">Save</button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Friendly Name</strong> is a descriptive name for the TaskQueue. Examples include "USA Technical Support" and "Inside Sales".</p>
+                    <p><strong>Reservation Activity</strong> is the Activity that a Worker is transitioned to when they are reserved to perform a Task.</p>
+                    <p><strong>Assignment Activity</strong> is the Activity that a Worker is transitioned to when they accept a reservation.</p>
+                    <p><strong>Max Reserved Workers</strong> lets you specify the maximum number of workers to reserve for a task. The default is 1.</p>
+                    <p>
+                        <strong>Target Workers</strong> is an SQL-like expression that matches available Workers to this TaskQueue. Example:
+                        <pre>languages HAS "ru" AND name IN ["Jimmy", "Bob", "Alice"]</pre>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+//$(function(){
+    $("#btnsubmit").bind("click", function() {
+            $.ajax({
+                url: "{{ path('createtaskqueueaction') }}",
+                async: true,
+                type: "POST",
+                dataType: "text",
+                data:{tqName:$("#tqName").val(),reservationActivity:$("#reservationActivity").val(), assignmentActivity:$("#assignmentActivity").val(),maxreservWorkers:$("#maxreservWorkers").val(),targetWorkers:$("#targetWorkers").val()},
+                success: function(resultData) {
+                    $("#alert").addClass("in alert-success");
+                    alert(resultData);
+                },
+                error: function() {
+                    alert("Error!!!");
+                }
+            })
+        });
+    $("#alertClose").click(function() {
+        $(this).parent().removeClass('in');
+    });
+//});
+</script>

@@ -1,0 +1,95 @@
+{% extends 'CommcloudVoiceBundle::sidebar.html.twig' %}
+{% block content %}
+     
+          <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            CommCloud
+
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">CommCloud</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+		
+       <div class="row">
+	    <div class="col-md-3" id="userWid">
+			<div class="box box-widget widget-user">
+				<div class="widget-user-header bg-aqua-active">
+					<h3 class="widget-user-username"> </h3>
+					<h5 class="widget-user-desc">Customer Service Rep</h5>
+				</div>
+				<div class="widget-user-image">
+					{% image '@CommcloudVoiceBundle/Resources/public/images/avatar_1.png' %}
+						<img class="img-circle" src="{{ asset_url }}" alt="User Avatar">
+				    {% endimage %}
+				</div>
+				<div class="box-footer">
+					<div class="row">
+						<div class="col-sm-6 border-right">
+							<div class="description-block">
+								<h5 class="description-header"></h5>
+								<span class="description-text">Reservations Accepted</span>
+							</div>
+						</div>
+						<div class="col-sm-6 border-right">
+							<div class="description-block">
+								<h5 class="description-header"></h5>
+								<span class="description-text">Reservations Rejected</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>
+	    <div class="col-md-3">
+			<div class="box box-default">
+				<div class="box-header with-border">
+					<h3 class="box-title">Task Status Chart</h3>
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+						<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+					</div>
+				</div>
+				<div class="box-body">
+					<div class="row">
+						<div class="col-md-8">
+							<div class="chart-responsive">
+								<canvas id="pieChart" style="height: 165px; width: 165px;" height="165" width="165"></canvas>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<ul class="chart-legend clearfix">
+								<li><i class="fa fa-circle-o text-red"></i>Pending Tasks</li>
+								<li><i class="fa fa-circle-o text-green"></i>Assigned Tasks</li>
+								<li><i class="fa fa-circle-o text-yellow"></i>Reserved Tasks</li>
+							</ul>
+						</div>						
+					</div>
+				</div>
+			<!-- /.box-body -->
+			</div>			
+		</div>
+	    <div class="col-md-3">
+			<textarea class="form-control" rows="10" placeholder="Worker Activity Log" disabled="" id="log"></textarea>
+		</div>
+	  </div>
+	  <div class="row">
+	    <div class="col-md-12" id="statisticsContent"></div>
+	  </div>
+	  <div class="row">
+	    <div class="col-md-12" id="workerStatscontent"></div>
+	  </div>	
+
+        </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
+      
+
+{% endblock %}
+

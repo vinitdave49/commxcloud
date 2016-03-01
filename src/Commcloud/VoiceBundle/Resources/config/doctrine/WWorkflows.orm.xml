@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Commcloud\VoiceBundle\Entity\WWorkflows" table="w_workflows">
+    <id name="sid" type="string" column="sid" length="50">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="friendlyName" type="string" column="friendly_name" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="accountSid" type="string" column="account_sid" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="workspaceSid" type="string" column="workspace_sid" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="assignmentCallbackUrl" type="string" column="assignment_callback_url" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fallbackAssignmentCallbackUrl" type="string" column="fallback_assignment_callback_url" length="100" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="configuration" type="string" column="configuration" length="500" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="taskReservationTimeout" type="integer" column="task_reservation_timeout" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">120</option>
+      </options>
+    </field>
+    <field name="dateCreated" type="datetime" column="date_created" nullable="false"/>
+    <field name="dateUpdated" type="datetime" column="date_updated" nullable="false"/>
+    <field name="status" type="integer" column="status" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">1</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

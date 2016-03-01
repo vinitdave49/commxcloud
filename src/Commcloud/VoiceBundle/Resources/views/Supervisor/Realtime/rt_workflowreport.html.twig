@@ -1,0 +1,123 @@
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">Realtime - Workflow Report</h3>
+            </div>
+            <div class="box-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Minutes</label>
+                                <select id="minutes" class="form-control">
+                                    <option value="0" selected="selected"></option>
+                                    <option value="15">Default(15mins)</option>
+                                    <option value="240">Last 4 hours</option>
+                                    <option value="480">Last 8 hours</option>                                     
+                                </select>
+                                <br>
+                                <button type="button" id="runreport" name="runreport" class="btn btn-block btn-primary">Run Report</button>
+                            </div>                                
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Workflow Name</label>
+                                <select id="workflow" class="form-control">
+                                    {% for workflow in workflows %}
+                                        <option value="{{ workflow.sid }}"> {{ workflow.friendly_name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <br>
+                                <button type="button" id="stopreport" name="stopreport" class="btn btn-block btn-primary">Stop Report</button>                                                                
+                            </div>                            
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Start Date</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" id="startdate" class="form-control" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask="">
+                                </div>
+                            <!-- /.input group -->
+                            </div>                               
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>End Date</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" id="enddate" class="form-control" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask="">
+                                </div>
+                            </div>                                
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <div class="box-body" id="reportcontainer">
+                
+            </div>
+            <!-- /.box-primary -->
+        </div>
+    </div>
+</section>
+<!-- /.content -->
+<script type="text/javascript">
+   // $(document).ready(function(){
+        $("#stopreport").hide();
+        $("#startdate").inputmask("yyyy/mm/dd", {"placeholder": "yyyy/mm/dd"});
+        $("#enddate").inputmask("yyyy/mm/dd", {"placeholder": "yyyy/mm/dd"});
+        var auto_refresh;
+    	$('#runreport').click(function(){
+    	    var $minutes = $('#minutes').val();
+    	    var $workflowname = $('#workflow').val();
+    	    var $startdate = $('#startdate').val();
+    	    var $enddate = $('#enddate').val();
+    	    
+    	    var dataString = 'minutes='+$minutes+'&workflowname='+$workflowname+'&startdate='+$startdate+'&enddate='+$enddate;
+    	    
+    	    //var $nodeCount = $('.form-control');
+    	    //alert('Element Count'+$nodeCount.length);
+    	    
+    	    var jsonData = {};
+    	    
+    	    $('.form-control').each(function(){
+    	       //alert($(this).attr('id')+" is "+$(this).val());
+    	       var key = $(this).attr('id');
+    	       jsonData[key] =$(this).val()
+    	    });
+    	    
+    	    //console.log(jsonData);
+    	    
+            $('#reportcontainer').load('{{ path('load_rt_workflow_report') }}', jsonData), function( response, status, xhr ) {
+            if ( status == "error" ) {
+                    var msg = "Sorry but there was an error: ";
+                    console.log( msg + xhr.status + " " + xhr.statusText );
+                }
+            }
+            auto_refresh = setInterval(function(){
+                $('#reportcontainer').load('{{ path('load_rt_workflow_report') }}', jsonData), function( response, status, xhr ) {
+                if ( status == "error" ) {
+                        var msg = "Sorry but there was an error: ";
+                        console.log( msg + xhr.status + " " + xhr.statusText );
+                    }
+                }
+            }, 10000);
+            $("#stopreport").show();
+            $("#runreport").hide();
+	    });
+	    
+	    $("#stopreport").click(function(){
+	       clearInterval(auto_refresh); 
+	       $("#runreport").show();
+	       $("#stopreport").hide();
+	    });
+	    
+  //  });
+</script>

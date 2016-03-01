@@ -1,0 +1,68 @@
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Realtime Worker Activity Report </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row">
+                            <div class="col-md-6">
+                    			<div class="box-body">
+                    				<div class="row">
+                    					<div class="col-md-8">
+                    						<div class="chart-responsive">
+                    							<canvas id="taskStatsRTChart" style="height: 205px; width: 205px;" height="205" width="205"></canvas>
+                    						</div>
+                    					</div>
+                    				</div>
+                    			</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<script type="text/javascript">
+//  $(function () {
+    $('#table').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "scrollX": true
+    });
+    $('#activitytable').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "scrollX": true
+    });
+    var response = '{{ realtime_tasks|json_encode() }}';
+    //var response = '{"pending":10,"assigned":90,"reserved":50}';
+    response = response.replace(/&quot;/g,'"');
+    console.log("response is: "+response);
+    var jsonObj = $.parseJSON(response);
+    
+    //var data = response.replace(/&quot;/g,'"');//JSON.parse(response);
+
+    for (key in jsonObj){
+        console.log("key is " + [ key ] + ", value is " + jsonObj[key]['value']);
+    }
+	var ctx = $("#taskStatsRTChart").get(0).getContext('2d');
+	var myDoughnutChart = new Chart(ctx).Doughnut(jsonObj);
+//  });
+ </script>

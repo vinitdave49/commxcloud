@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+    <head>
+         <meta charset="utf-8"/>
+         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+         <title>{% block title %}CommCloud{% endblock %}</title>
+      
+        {% block stylesheets %}
+          {% stylesheets '@CommcloudVoiceBundle/Resources/public/css/bootstrap.min.css' 
+                         '@CommcloudVoiceBundle/Resources/public/css/*'  filter="cssrewrite"%}
+              <link rel="stylesheet" href="{{ asset_url }}" />
+          {% endstylesheets %}
+        
+            <!-- Font Awesome -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+            <!-- Ionicons -->
+            <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+       
+        {% endblock %}
+        
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body  class="hold-transition skin-blue sidebar-mini">
+         <div id="abc" data-path="{{ path('commcloud_voice_token') }}"></div>
+        <div class="wrapper">
+              <!-- Main Header -->
+              <header class="main-header">
+        
+                <!-- Logo -->
+                <a href="home.php" class="logo">
+                  <!-- mini logo for sidebar mini 50x50 pixels -->
+                  <span class="logo-mini"><b>C</b>C</span>
+                  <!-- logo for regular state and mobile devices -->
+                  <span class="logo-lg"><b>CommCloud</b></span>
+                </a>
+        
+                <!-- Header Navbar -->
+                <nav class="navbar navbar-static-top" role="navigation">
+                  <!-- Sidebar toggle button-->
+                  <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                  </a>
+                   <div class="navbar-custom-menu">
+        		    <ul class="nav navbar-nav">
+        			  <li class="dropdown user user-menu">
+        		        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        				  <i class="fa fa-user"></i>
+                          <span class="hidden-xs">
+        				
+        				  </span>
+                        </a>
+        			  
+        			  <ul class="dropdown-menu">
+                          <li class="user-footer">
+                            <div class="pull-right">
+                              <!--<a href="logout_action.php" class="btn btn-default btn-flat">Sign out</a>-->
+        					  <a href="{{ path('logout') }}" class="btn btn-default btn-flat" id="signOut">Sign out</a>
+                            </div>
+                          </li>
+                        </ul>
+        				</li>
+        			</ul>
+        		   </div>
+                </nav>
+              </header>
+              
+            {% block sidebar %}
+             
+            {% endblock %}
+            
+            {% block content%}
+            
+            {% endblock %}
+           
+          <div class="phone-box">
+        		<div class="phone-header"><h4> CommPhone </h4></div>
+        		<div id ="phone-box-content" class="box box-primary">
+                    <div class="box-body padding-override" style="text-align:center;" >
+        			 <!-- <div class="" style=" padding-bottom:5px;">
+        			    <button class="btn btn-block btn-default btn-sm btn-ready" id="ready">Ready</button>
+        			    <button class="btn btn-not-ready btn-block btn-default btn-sm" style="margin-top:0px;" id="notready">Not Ready</button> 
+        			  </div>-->				
+        			<div class="form-group padding-override" style="text-align:left;">
+        				<label>Worker Activity</label>
+        				<select class="form-control" id="workerActivity">
+        					<option value="WAb4bc7105ecbff4189f3a36050d3b7863">Idle</option>
+        					<option value="WA81cd6c807dc20b2d1e829d226f2ac692">Busy</option>
+        					<option value="WAb7f02f442ef2784e2644305b36c632e8">Reserved</option>
+        					<option value="WA7b56deb0d7cd97a69b663e4a62532ac7" selected="selected">Offline</option>
+        				</select>
+        			</div>
+        			 
+        			  <div class="box-header padding-override padding-bottom-override padding-top-override" id="incomingcallalert">
+        			  </div>
+        			  <div class="padding-override">
+        			    <input type="text" class="form-control" id="exampleInputPhone" placeholder="Enter Phone Number to call">
+        			  </div>
+        			  <div class="padding-override ">
+        			    <button class="btn btn-block btn-default btn-sm keypad-123" style=" margin-top:0px;" id="button1" value="1">1</button>
+        				<button class="btn btn-block btn-default btn-sm keypad-123" style=" margin-top:0px;" id="button2" value="2">2</button>
+        				<button class="btn btn-block btn-default btn-sm keypad-123" style=" margin-top:0px;" id="button3" value="3" >3</button>
+        			  </div>
+        			  <div class="padding-override padding-top-override" >
+        			    <button class="btn btn-block btn-default btn-sm keypad-456" style="margin-top:0px;" id="button4" value="1">4</button>
+        				<button class="btn btn-block btn-default btn-sm keypad-456" style="margin-top:0px;" id="button5" value="1">5</button>
+        				<button class="btn btn-block btn-default btn-sm keypad-456" style="margin-top:0px;" id="button6" value="1">6</button>
+        			  </div>
+        			  <div class="padding-override padding-top-override" >
+        			    <button class="btn btn-block btn-default btn-sm keypad-789" style="margin-top:0px;" id="button7" value="7">7</button>
+        				<button class="btn btn-block btn-default btn-sm keypad-789" style="margin-top:0px;" id="button8" value="8">8</button>
+        				<button class="btn btn-block btn-default btn-sm keypad-789" style="margin-top:0px;" id="button9" value="9">9</button>
+        			  </div>
+        			  <div class="padding-override padding-top-override" >
+        			    <button class="btn btn-block btn-default btn-sm keypad-0" style="margin-top:0px;" id="buttonstar" value="*">*</button>
+        				<button class="btn btn-block btn-default btn-sm keypad-0" style="margin-top:0px;" id="button0" value="0">0</button>
+        				<button class="btn btn-block btn-default btn-sm keypad-0" style="margin-top:0px;" id="buttonpound" value="#">#</button>
+        			  </div>
+        			  <div class="padding-override" >
+        			    <button class="btn btn-block btn-default btn-sm keypad-123" style=" border-radius:0px" id="makecall">Call</button>
+        				<button class="btn btn-block btn-default btn-sm keypad-123" style="margin-top:0px; border-radius:0px" id="answer">Answer</button>
+        				<button class="btn btn-block btn-default btn-sm keypad-123" style="margin-top:0px;  border-radius:0px" id="hangup">Hang-Up</button>
+        			  </div>
+        			  <div class="box-header padding-override padding-top-override padding-bottom-override" >
+        			    <div class="caller-info-div" style="" id="status"> 
+                        </div>
+        			  </div>
+        			  <div class="bottom-div-text" ><span>Ready Agents :</span> <span>1</span></div>
+        			  <div class="bottom-div-text" ><span>Call Queue :</span> <span>0</span></div>
+        			</div>
+            </div>
+      </div>
+
+          <div class="chat-box" style="right:280px;">
+        		<div class="chat-header"><h4> CommChat </h4></div>
+        		<div id ="chat-box-content" class="box box-primary">
+              <div class="box-body padding-override" style="text-align:center;" >
+
+                <div class="direct-chat-messages" id="messages">
+                    <!-- Message. Default to the left -->
+                    <div class="direct-chat-msg">
+                        <div class="direct-chat-info clearfix">
+                            <span class="direct-chat-name pull-left">Alexander Pierce</span>
+                            <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+                        </div>
+                        <!-- /.direct-chat-info -->
+                        <!-- /.direct-chat-img -->
+                        <div class="direct-chat-text">
+                            Is this template really for free? That's unbelievable!
+                        </div>
+                        <!-- /.direct-chat-text -->
+                    </div>
+                    <!-- /.direct-chat-msg -->
+    
+                    <!-- Message to the right -->
+                    <div class="direct-chat-msg right">
+                        <div class="direct-chat-info clearfix">
+                            <span class="direct-chat-name pull-right">Sarah Bullock</span>
+                            <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
+                        </div>
+                        <!-- /.direct-chat-info -->
+                        <!-- /.direct-chat-img -->
+                        <div class="direct-chat-text">
+                            You better believe it!
+                        </div>
+                        <!-- /.direct-chat-text -->
+                    </div>
+                    <!-- /.direct-chat-msg -->
+                </div>
+                <!--/.direct-chat-messages-->        			
+                <!-- /.direct-chat-pane -->
+                <div class="box-footer">
+                    <form action="#" method="post">
+                        <div class="input-group">
+                            <input type="text" name="message" id="chat-input" placeholder="Type Message ..." class="form-control" autofocus>
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-primary btn-flat">Send</button>
+                              </span>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box-footer--> 
+              </div>
+            </div>
+          </div>
+          <!-- Main Footer -->
+          <footer class="main-footer">
+            <!-- To the right -->
+            <div class="pull-right hidden-xs">
+              Anything you want
+            </div>
+            <!-- Default to the left -->
+            <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
+          </footer>
+            
+        </div>
+       
+      
+        {% block javascripts %}
+          <script src="https://static.twilio.com/libs/twiliojs/1.2/twilio.min.js"></script>
+          <script src="//media.twiliocdn.com/sdk/rtc/js/ip-messaging/v0.9/twilio-ip-messaging.min.js"></script>
+          <script src="//media.twiliocdn.com/sdk/js/common/v0.1/twilio-common.min.js"></script>
+          <script src="https://media.twiliocdn.com/taskrouter/js/v1.1.1/taskrouter.min.js"></script>
+          {% javascripts  '@CommcloudVoiceBundle/Resources/public/js/jQuery.js' 
+                          '@CommcloudVoiceBundle/Resources/public/js/inputmask.js'
+                          '@CommcloudVoiceBundle/Resources/public/js/*'  %}
+              <script src="{{ asset_url }}"></script>
+          {% endjavascripts %}
+             
+            
+            <!-- ChartJS Script Import -->
+        	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+        	
+        {% endblock %}
+    </body>
+</html>

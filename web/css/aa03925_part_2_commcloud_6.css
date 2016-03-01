@@ -1,0 +1,95 @@
+.control-sidebar-light+, .control-sidebar-bg{
+  background:none;
+  border-left: 0px solid ;
+}
+.padding-override {
+  padding:8px;
+  padding-top:5px;
+  padding-bottom:4px;
+}
+.padding-top-override{
+  padding-top:0px;
+}
+.padding-bottom-override{
+  padding-bottom:0px;
+}
+h4{
+ margin-top:0px;
+ margin-bottom:0px;
+}
+.top-div-text{
+  padding:10px;
+  margin-top:0px;
+  margin-bottom:0px;
+  background-color:#008d4c;
+  color: #fff;
+  border-radius: 5px;
+}
+.bottom-div-text > span{
+  color: #fff;
+}
+
+.btn-ready {
+  width:49%; 
+  display:inline-block;
+}
+.btn-not-ready{
+  width:49%; 
+  display:inline-block;
+  margin-top:0px;
+}
+.keypad-123 , .keypad-456, .keypad-789, .keypad-0{
+ width: 32%;
+ margin-top:0px;
+ display:inline-block;
+}
+
+.caller-info-div{
+  margin-top:0px;
+  margin-bottom:0px;
+  border-radius: 5px;
+  border: 2px solid #f4f4f4;
+  background-color: #f4f4f4;
+  /* font-size: 24px; */
+  text-align: left;
+}
+.bottom-div-text{
+  margin-top: 5px;
+  margin-bottom:0px; 
+  border-radius: 5px; 
+  background-color: #367fa9;
+  text-align: left;
+  padding-left:10px;
+}
+.content-header{
+  padding-bottom:10px;
+  border-bottom: 3px solid #d2d6de;
+}
+.control-sidebar{
+  top: 69px;
+}
+.content-footer{
+  position: relative;
+  padding: 12px;
+  border: 1px solid #d2d6de;
+  background: #fff;
+  bottom: 0px;
+  /*right: 0px;*/
+  float:right;
+}
+.content-wrapper{
+  min-height:616px;
+}
+.phone-box, .chat-box{
+  position: fixed;
+  width: 250px;
+  bottom: 0px;
+  right: 20px;
+}
+.phone-header, .chat-header{
+  color:#fff;
+  padding: 20px;
+  cursor: pointer;
+  border-radius: 5px 5px 0px 0px;
+  background-color: #3c8dbc;
+}

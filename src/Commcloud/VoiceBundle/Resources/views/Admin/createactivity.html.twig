@@ -1,0 +1,119 @@
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Create Activity</h3>
+                </div>
+                <div class="box-body">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                                <div class="form-group">
+                                    <label>Activity Name</label>
+                                    <input type="text" id="actName" name="actName" class="form-control" placeholder="Friendly Activity Name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Availability</label>
+                                    <div>
+                                        <input type="radio" name="availability" id="availability" value="true" checked="">Available
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="availability" id="availability" value="false">Not Available
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" id="btnsubmit" name="btnsubmit" class="btn btn-block btn-danger">Save</button>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Friendly Name</strong> is a descriptive name for the Activity. Examples include "Offline", "Busy" and "Wrapping Up".</p>
+                        <p>An <strong>Availability</strong> type of 'available' means that Workers currently engaged in this Activity are eligible for Task assignment.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="box box-danger">
+                <div class="box-header">
+                    <h3 class="box-title">Activity List</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Activity ID: activate to sort column descending" style="width: 180px;">Activity ID</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Activity Name: activate to sort column ascending" style="width: 223px;">Activity Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        //Place your database query code here
+
+                                        <tr>
+                                            <td class="projectId">
+
+                                            </td>
+                                            <td class="projectName">
+
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <!-- <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+									</div> -->
+                                <div class="col-sm-7">
+                                    <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                                        <ul class="pagination">
+                                            <li class="paginate_button previous disabled" id="example1_previous">
+                                                <a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a>
+                                            </li>
+                                            <li class="paginate_button active">
+                                                <a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a>
+                                            </li>
+                                            <li class="paginate_button ">
+                                                <a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a>
+                                            </li>
+                                            <li class="paginate_button next" id="example1_next">
+                                                <a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+</section>
+<script>
+//$(function(){
+    $("#btnsubmit").bind("click", function() {
+            $.ajax({
+                url: "{{ path('createactivityaction') }}",
+                async: true,
+                type: "POST",
+                dataType: "text",
+                data:{actName:$("#actName").val(), availability:$("#availability").val()},
+                success: function(resultData) {
+                    $("#alert").addClass("in alert-success");
+                    alert(resultData);
+                },
+                error: function() {
+                    alert("Error!!!");
+                }
+            })
+        });
+    $("#alertClose").click(function() {
+        $(this).parent().removeClass('in');
+    });
+//});
+</script>

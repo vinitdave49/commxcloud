@@ -1,0 +1,52 @@
+
+{% block content %}
+   
+        <div class="box">
+			<div class="box-header">
+				<h3 class="box-title">Call Recording</h3>
+				<div class="box-tools">
+					<div class="input-group input-group-sm" style="width: 150px;">
+						<input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+						<div class="input-group-btn">
+							<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body table-responsive no-padding">
+				<table class="table table-hover">
+					<tbody>
+						<tr>
+							<th>Call Id</th>
+							<th>Date</th>
+							<th>From</th>
+							<th>To</th>
+							<th>Duration</th>
+							<th>Play Recording</th>
+						</tr>
+					{% for call in calls %}
+						<tr>
+							<td>{{ call.call_sid }}</td>
+							<td>{{ call.date_created|date('Y-m-d\\TH:i:sP') }}</td>
+							
+							{{ render(controller('CommcloudVoiceBundle:Agent:getfromtoofcallrecording',
+											{ 'call_sid': call.call_sid }
+							)) }}
+							
+							<td>{{ call.duration }}</td>
+							<td>
+								<audio controls>
+									<source src="https://api.twilio.com/{{call.uri}}.mp3" type="audio/mpeg">
+								</audio>
+							</td>
+						</tr>
+					{% endfor %}	
+					</tbody>
+				</table>						
+			</div>
+			<!-- /.box-body -->		
+		</div>
+    
+{% endblock %}
+    

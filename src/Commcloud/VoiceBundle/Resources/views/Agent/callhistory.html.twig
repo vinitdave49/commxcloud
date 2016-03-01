@@ -1,0 +1,47 @@
+
+{% block content %}
+
+    
+    <div class="box">
+			<div class="box-header">
+				<h3 class="box-title">Call History</h3>
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+				</div>
+			</div>
+			<div class="box-body table-responsive no-padding">
+				<table class="table table-hover">
+					<tbody>
+						<tr>
+							<th>Call SID</th>
+							<th>From</th>
+							<th>To</th>
+							<th>Status</th>
+							<th>Duration</th>
+						</tr>
+					
+						{% for call in calls %}
+							<tr>
+								<td>{{call.sid}}</td>
+								<td>{{call.from }}</td>
+								<td>{{call.to}}</td>
+								<td>{{call.status}}</td>
+								<td>{{call.duration}}</td>
+							</tr>
+						{% endfor %}
+						
+					</tbody>
+				</table>						
+			</div>
+			<div class="box-footer clearfix">
+              <ul class="pagination pagination-sm no-margin pull-right">
+                <li><a href="#">«</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">»</a></li>
+              </ul>
+            </div>
+		</div>
+
+{% endblock %}

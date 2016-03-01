@@ -1,0 +1,109 @@
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">Historical - Worker Report</h3>
+            </div>
+            <div class="box-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Minutes</label>
+                                <select id="minutes" class="form-control">
+                                    <option value="0" selected="selected"></option>
+                                    <option value="15">Default(15mins)</option>
+                                    <option value="240">Last 4 hours</option>
+                                    <option value="480">Last 8 hours</option>                                     
+                                </select>
+                                <br>
+                                <button type="button" id="runreport" name="runreport" class="btn btn-block btn-primary">Run Report</button>
+                            </div>                                
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Worker Name</label>
+                                <select id="worker" class="form-control">
+                                    {% for worker in workers %}
+                                        <option value="{{ worker.sid }}"> {{ worker.friendly_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>                                
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Start Date</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" id="startdate" class="form-control" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask="">
+                                </div>
+                            <!-- /.input group -->
+                            </div>                               
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>End Date</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" id="enddate" class="form-control" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask="">
+                                </div>
+                            </div>                                
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <div class="box-body" id="reportcontainer">
+                
+            </div>
+            <!-- /.box-primary -->
+        </div>
+    </div>
+</section>
+<!-- /.content -->
+<script type="text/javascript">
+(function($){	
+   // $(document).ready(function(){
+       
+        
+    	$('#runreport').on('click',function(e){
+    	    
+    	    console.log('clicked'+ e);
+    	    $("#startdate").inputmask("yyyy/mm/dd", {"placeholder": "yyyy/mm/dd"});
+            $("#enddate").inputmask("yyyy/mm/dd", {"placeholder": "yyyy/mm/dd"});
+    	    var $minutes = $('#minutes').val();
+    	    var $workername = $('#worker').val();
+    	    var $startdate = $('#startdate').val();
+    	    var $enddate = $('#enddate').val();
+    	    
+    	    var dataString = 'minutes='+$minutes+'&workername='+$workername+'&startdate='+$startdate+'&enddate='+$enddate;
+    	    
+    	    //var $nodeCount = $('.form-control');
+    	    //alert('Element Count'+$nodeCount.length);
+    	    
+    	    var jsonData = {};
+    	    
+    	    $('.form-control').each(function(){
+    	       //alert($(this).attr('id')+" is "+$(this).val());
+    	       var key = $(this).attr('id');
+    	       jsonData[key] =$(this).val()
+    	    });
+    	    
+    	    //console.log(jsonData);
+    	    
+            $('#reportcontainer').load('{{ path('load_ht_worker_report') }}', jsonData), function( response, status, xhr ) {
+            if ( status == "error" ) {
+                    var msg = "Sorry but there was an error: ";
+                    console.log( msg + xhr.status + " " + xhr.statusText );
+                }
+            }
+	    });
+   // });
+    
+})(jQuery);
+</script>

@@ -1,0 +1,72 @@
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Historical Worker Activity Duration Report </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row">
+                            <div class="col-sm-6"></div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="table" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="table_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Activity: activate to sort column descending">Activity</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table" rowspan="1" colspan="1" aria-label="Min. Duration: activate to sort column ascending">Min. Duration</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table" rowspan="1" colspan="1" aria-label="Max. Duration: activate to sort column ascending">Max. Duration</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table" rowspan="1" colspan="1" aria-label="Avg. Duration: activate to sort column ascending">Avg. Duration</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table" rowspan="1" colspan="1" aria-label="Total Duration: activate to sort column ascending">Total Duration</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for key, activity_duration in activity_durations %}
+                                            <tr role="row">
+                                                <td class="sorting_1">{{ activity_duration.friendly_name }}</td>
+                                                <td>{{ activity_duration.min }}</td>
+                                                <td>{{ activity_duration.max }}</td>
+                                                <td>{{ activity_duration.avg }}</td>
+                                                <td>{{ activity_duration.total }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th rowspan="1" colspan="1">Activity</th>
+                                            <th rowspan="1" colspan="1">Min. Duration</th>
+                                            <th rowspan="1" colspan="1">Max. Duration</th>
+                                            <th rowspan="1" colspan="1">Avg. Duration</th>
+                                            <th rowspan="1" colspan="1">Total Duration</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<script type="text/javascript">
+ // $(function () {
+    $('#table').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "scrollX": true
+    });
+  //});
+ </script>

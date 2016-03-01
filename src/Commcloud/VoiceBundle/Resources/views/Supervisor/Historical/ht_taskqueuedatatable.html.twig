@@ -1,0 +1,91 @@
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Historical Task Queue Report </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row">
+                            <div class="col-sm-6"></div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="table" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="table_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="table" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Reservations Created</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Reservations Accepted</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Reservations Cancelled</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Reservations Rejected</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Reservations Timed Out</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Reservations Rescinded</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Tasks Entered</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Tasks Cancelled</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Tasks Deleted</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Tasks Moved</th>
+                                            <th class="sorting" tabindex="0" aria-controls="table" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Avg. Task Acceptance Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for data in historical_data %}
+                                            <tr role="row">
+                                                <td class="sorting_1">{{ data.reservations_created }}</td>
+                                                <td>{{ data.reservations_accepted }}</td>
+                                                <td>{{ data.reservations_canceled }}</td>
+                                                <td>{{ data.reservations_rejected }}</td>
+                                                <td>{{ data.reservations_timed_out }}</td>
+                                                <td>{{ data.reservations_rescinded }}</td>
+                                                <td>{{ data.tasks_entered }}</td>
+                                                <td>{{ data.tasks_canceled }}</td>
+                                                <td>{{ data.tasks_deleted }}</td>
+                                                <td>{{ data.tasks_moved }}</td>
+                                                <td>{{ data.avg_task_acceptance_time }}</td>
+                                            </tr>
+                                        {% endfor %}
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th rowspan="1" colspan="1">Reservations Created</th>
+                                            <th rowspan="1" colspan="1">Reservations Accepted</th>
+                                            <th rowspan="1" colspan="1">Reservations Cancelled</th>
+                                            <th rowspan="1" colspan="1">Reservations Rejected</th>
+                                            <th rowspan="1" colspan="1">Reservations Timed Out</th>
+                                            <th rowspan="1" colspan="1">Reservations Rescinded</th>
+                                            <th rowspan="1" colspan="1">Tasks Entered</th>
+                                            <th rowspan="1" colspan="1">Tasks Cancelled</th>
+                                            <th rowspan="1" colspan="1">Tasks Deleted</th>
+                                            <th rowspan="1" colspan="1">Tasks Moved</th>
+                                            <th rowspan="1" colspan="1">Avg. Task Acceptance Time</th>                                            
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<script type="text/javascript">
+ // $(function () {
+    $('#table').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "scrollX": true
+    });
+//  });
+ </script>

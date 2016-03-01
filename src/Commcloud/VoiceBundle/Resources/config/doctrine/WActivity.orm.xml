@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Commcloud\VoiceBundle\Entity\WActivity" table="w_activity">
+    <id name="sid" type="string" column="sid" length="50">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="accountSid" type="string" column="account_sid" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Account Sid</option>
+      </options>
+    </field>
+    <field name="workspaceSid" type="string" column="workspace_sid" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Workspace Sid</option>
+      </options>
+    </field>
+    <field name="friendlyName" type="string" column="friendly_name" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+        <option name="comment">Activity Name</option>
+      </options>
+    </field>
+    <field name="available" type="integer" column="available" nullable="true">
+      <options>
+        <option name="unsigned"/>
+        <option name="comment">Activity State</option>
+        <option name="default">0</option>
+      </options>
+    </field>
+    <field name="status" type="integer" column="status" nullable="false">
+      <options>
+        <option name="unsigned"/>
+        <option name="default">1</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

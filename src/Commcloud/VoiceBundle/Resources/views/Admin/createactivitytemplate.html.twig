@@ -1,0 +1,100 @@
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Create Activity Template</h3>
+                    <!--<div class="box-tools pull-right">
+								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+								<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+							</div>-->
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Activity Template</h4>
+                            <input id="btnAdd" type="button" class="btn btn-danger btn-block btn-flat" value="Add" />
+                            <br />
+                            <br />
+                        </div>
+                        <div class="col-md-6">
+                            <div id="activityTemplateContainer">
+                                <!-- Fields will be added here -->
+                            </div>
+                            <br/>
+                            <input id="btnGet" type="button" class="btn btn-danger btn-block btn-flat" value="Get Values" />
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+  //  $(document).ready(function() {
+        $("#btnAdd").bind("click", function() {
+           // alert("Add Button is clicked!!!");
+            var div = $("<div id='element' />");
+            div.html(GetDynamicTextBox(""));
+            $("#activityTemplateContainer").append(div);
+        });
+        var i = 0;
+        $("#btnGet").bind("click", function() {
+            var values = [];
+            $("input[name=DynamicTextBox]").each(function() {
+                values[i] = $(this).val();
+                i++;
+            });
+            //console.log(values);
+            var str_json = JSON.stringify(values);
+            //console.log("Activity Template: str_json: "+str_json);
+            $.ajax({
+                url: "activity_template_action.php",
+                async: true,
+                type: "POST",
+                data: str_json,
+                success: function() {
+                    //response = $(this).responseText;
+                    //alert(resposne);
+                    //if(response == "success"){
+                    $("#alert").addClass("in alert-success");
+                    //}
+                },
+                error: function() {
+
+                }
+            })
+        });
+        /*$("body").on("click", ".remove", function() {
+            alert("Remove called");
+            $(this).closest("div").remove();
+        });*/
+        // $("#remove").click(function(){
+        //   alert("Remove button is clicked!!!");
+        // });
+        $("#alertClose").click(function() {
+            $(this).parent().removeClass('in');
+        });
+   // });
+
+    function GetDynamicTextBox(value) {
+        return '<input name = "DynamicTextBox" type="text" value = "' + value + '" placeholder="Attribute Name"/>' +
+            '<input type="button" id="remove" value="Remove" class="btn btn-danger btn-block btn-flat" onClick="removeElement(\'activityTemplateContainer\', \'element\');" />'
+    }
+
+    function removeElement(parentDiv, childDiv){
+     if (childDiv == parentDiv) {
+          alert("The parent div cannot be removed.");
+        }
+     else if (document.getElementById(childDiv)) {
+          var child = document.getElementById(childDiv);
+          var parent = document.getElementById(parentDiv);
+          parent.removeChild(child);
+        }
+     else {
+          alert("Child div has already been removed or does not exist.");
+          return false;
+         }
+    }
+</script>
